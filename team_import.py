@@ -20,7 +20,8 @@ for x in range(0,32):
     teamAbr = team3['abbreviation']
     team_insert = open('sql/team_insert.sql', 'r').read()
     print(team_insert.replace("#team#", str(teamName)).replace("#teamId#", str(teamId)).replace("#teamAbr#",str(teamAbr)))
-    db_cnx.execute(team_insert.replace("#team#", str("'"+teamName+"'")).replace("#teamId#", str("'"+str(teamId)+"'")).replace("#teamAbr#",str("'"+teamAbr+"'")))
+    value = (teamName, str(teamId), teamAbr)
+    db_cnx.insert_one(team_insert, value)
 
 
 #exp_variants = db_cnx.execute(open('sql/experiment_variants.sql').read().replace("#exp-id#", str(exp_id)))
