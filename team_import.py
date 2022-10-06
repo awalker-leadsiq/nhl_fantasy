@@ -7,7 +7,7 @@ db_cnx = db_cnx()
 #print(db_cnx.execute('select * from team'))
 
 
-
+##insert and update
 req = requests.get("https://statsapi.web.nhl.com/api/v1/teams")
 teamjson = req.json()
 team = teamjson['teams']
@@ -18,8 +18,8 @@ for x in range(0,32):
     teamId = team3['id']
     teamName = team3['name']
     teamAbr = team3['abbreviation']
+    print(teamName)
     team_insert = open('sql/team_insert.sql', 'r').read()
-    print(team_insert.replace("#team#", str(teamName)).replace("#teamId#", str(teamId)).replace("#teamAbr#",str(teamAbr)))
     value = (teamName, str(teamId), teamAbr)
     db_cnx.insert_one(team_insert, value)
 
