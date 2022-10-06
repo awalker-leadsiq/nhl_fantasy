@@ -17,6 +17,20 @@ class db_cnx:
         cnx.close()
         return results
 
+    def insert_one(self, sql, value):
+        cnx = mysql.connector.connect(user=self.user, password=self.password, host=self.host, database=self.db)
+        cursor = cnx.cursor()
+        cursor.execute(sql, value)
+        cnx.commit()
+        cnx.close()
+
+    def insert_many(self, sql, values):
+        cnx = mysql.connector.connect(user=self.user, password=self.password, host=self.host, database=self.db)
+        cursor = cnx.cursor()
+        cursor.executemany(sql, value)
+        cnx.commit()
+        cnx.close()
+
 
 
 
